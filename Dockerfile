@@ -63,56 +63,56 @@ RUN \
 
     # for gd
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install $mc gd \
+    && docker-php-ext-install   gd \
     # for bz2
-    && docker-php-ext-install $mc bz2 \
+    && docker-php-ext-install   bz2 \
     # for enchant
-    && docker-php-ext-install $mc enchant \
+    && docker-php-ext-install   enchant \
     # for gmp
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
-    && docker-php-ext-install $mc gmp \
+    && docker-php-ext-install   gmp \
     # for soap wddx xmlrpc tidy xsl
-    && docker-php-ext-install $mc soap wddx xmlrpc tidy xsl \
+    && docker-php-ext-install   soap wddx xmlrpc tidy xsl \
     # for zip
-    && docker-php-ext-install $mc zip \
+    && docker-php-ext-install   zip \
     # for snmp
-    && docker-php-ext-install $mc snmp \
+    && docker-php-ext-install   snmp \
     # for pgsql pdo_pgsql
-    && docker-php-ext-install $mc pgsql pdo_pgsql \
+    && docker-php-ext-install   pgsql pdo_pgsql \
     # for pspell
-    && docker-php-ext-install $mc pspell \
+    && docker-php-ext-install   pspell \
     # for recode
-    && docker-php-ext-install $mc recode \
+    && docker-php-ext-install   recode \
     # for pdo_firebird
-    && docker-php-ext-install $mc pdo_firebird \
+    && docker-php-ext-install   pdo_firebird \
     # for pdo_dblib
     && docker-php-ext-configure pdo_dblib --with-libdir=lib/x86_64-linux-gnu \
-    && docker-php-ext-install $mc pdo_dblib \
+    && docker-php-ext-install   pdo_dblib \
     # for ldap
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu \
-    && docker-php-ext-install $mc ldap \
+    && docker-php-ext-install   ldap \
     # for imap
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-install $mc imap \
+    && docker-php-ext-install   imap \
     # for interbase
-    && docker-php-ext-install $mc interbase \
+    && docker-php-ext-install   interbase \
     # for intl
-    && docker-php-ext-install $mc intl \
+    && docker-php-ext-install   intl \
 
     # no dependency extension
-    && docker-php-ext-install $mc bcmath \
-    && docker-php-ext-install $mc calendar \
-    && docker-php-ext-install $mc exif \
-    && docker-php-ext-install $mc gettext \
-    && docker-php-ext-install $mc sockets \
-    && docker-php-ext-install $mc dba \
-    && docker-php-ext-install $mc mysqli \
-    && docker-php-ext-install $mc pcntl \
-    && docker-php-ext-install $mc pdo_mysql \
-    && docker-php-ext-install $mc shmop \
-    && docker-php-ext-install $mc sysvmsg \
-    && docker-php-ext-install $mc sysvsem \
-    && docker-php-ext-install $mc sysvshm \
+    && docker-php-ext-install   bcmath \
+    && docker-php-ext-install   calendar \
+    && docker-php-ext-install   exif \
+    && docker-php-ext-install   gettext \
+    && docker-php-ext-install   sockets \
+    && docker-php-ext-install   dba \
+    && docker-php-ext-install   mysqli \
+    && docker-php-ext-install   pcntl \
+    && docker-php-ext-install   pdo_mysql \
+    && docker-php-ext-install   shmop \
+    && docker-php-ext-install   sysvmsg \
+    && docker-php-ext-install   sysvsem \
+    && docker-php-ext-install   sysvshm \
 
 #    # Install PECL extensions
 
@@ -127,13 +127,13 @@ RUN \
     } > temp.m4 \
     && mv temp.m4 /usr/src/php/ext/odbc/config.m4 \
     && docker-php-ext-configure odbc --with-unixODBC=shared,/usr \
-    && docker-php-ext-install $mc odbc \
+    && docker-php-ext-install   odbc \
     && docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr \
-    && docker-php-ext-install $mc pdo_odbc \
+    && docker-php-ext-install   pdo_odbc \
     && docker-php-source delete \
 
     #for opcache php5.6
-    docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install $mc opcache \
+    docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install   opcache \
 
     && apt-get clean all \
     && rm -rf /var/lib/apt/lists/*  \
@@ -153,7 +153,7 @@ RUN \
     && pecl install memcached-2.2.0 && docker-php-ext-enable memcached \
 
     # for mcrypt require PHP version 5.6
-    && docker-php-ext-install $mc mcrypt \
+    && docker-php-ext-install   mcrypt \
 
     # for mongodb 5.6
     && pecl install mongodb-1.2.2 && echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini \
@@ -164,7 +164,7 @@ RUN \
     && curl -fsSL 'https://pecl.php.net/get/xdebug-2.5.5.tgz' -o xdebug-2.5.5.tgz \
     && mkdir xdebug \
     && tar -xf xdebug-2.5.5.tgz -C xdebug --strip-components=1 \
-    && ( cd xdebug && phpize && ./configure && make $mc && make install ) \
+    && ( cd xdebug && phpize && ./configure && make   && make install ) \
     && docker-php-ext-enable xdebug \
     && docker-php-source delete \
 
@@ -174,7 +174,7 @@ RUN \
 #    && curl -fsSL 'https://pecl.php.net/get/swoole-2.0.11.tgz' -o swoole-2.0.11.tgz \
 #    && mkdir swoole \
 #    && tar -xf swoole-2.0.11.tgz -C swoole --strip-components=1 \
-#    && cd swoole && phpize && ./configure && make $mc && make install \
+#    && cd swoole && phpize && ./configure && make   && make install \
 #    && docker-php-ext-enable swoole \
 #    && docker-php-source delete \
 
