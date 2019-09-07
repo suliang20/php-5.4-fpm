@@ -114,10 +114,7 @@ RUN \
     && docker-php-ext-install   sysvsem \
     && docker-php-ext-install   sysvshm \
 
-#    # Install PECL extensions
-
-    #for opcache php5.6
-    docker-php-ext-configure opcache --enable-opcache && docker-php-ext-install   opcache \
+    # Install PECL extensions
 
     && apt-get clean all \
     && rm -rf /var/lib/apt/lists/*  \
